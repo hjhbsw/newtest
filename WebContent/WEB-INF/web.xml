@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Shorturl</display-name>
+	<description>Shorturl web config for tomcat</description>
+	<!-- TODO: change to a servlet -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<listener>
+		<listener-class>com.shorturl.server.ShorturlInitListener</listener-class>
+	</listener>	
+	
+	<filter>
+		<filter-name>exceptionFilter</filter-name>
+		<filter-class>com.shorturl.servlets.ExceptionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>exceptionFilter</filter-name>
+		<url-pattern>/shorturl/*</url-pattern>
+	</filter-mapping>
+	<!--                       long to short                       -->
+	<servlet>
+		<servlet-name>Long2Short</servlet-name>
+		<servlet-class>com.shorturl.servlets.Long2Short</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Long2Short</servlet-name>
+		<url-pattern>/shorturl/short.xml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Long2Short</servlet-name>
+		<url-pattern>/shorturl/short.json</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Long2ShortService</servlet-name>
+		<servlet-class>com.shorturl.servlets.Long2ShortService</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Long2ShortService</servlet-name>
+		<url-pattern>/shorturl/long2short.json</url-pattern>
+	</servlet-mapping>
+<!--                        short to long                                                                         -->	
+	<servlet>
+		<servlet-name>Short2Long</servlet-name>
+		<servlet-class>com.shorturl.servlets.Short2Long</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Short2Long</servlet-name>
+		<url-pattern>/shorturl/long.xml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Short2Long</servlet-name>
+		<url-pattern>/shorturl/long.json</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Short2LongService</servlet-name>
+		<servlet-class>com.shorturl.servlets.Short2LongService</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Short2LongService</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	<!--                   change long 2 short mapping                      -->
+	<servlet>
+        <servlet-name>ChangeUrlservlet</servlet-name>
+        <servlet-class>com.shorturl.servlets.ChangeUrlservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeUrlservlet</servlet-name>
+        <url-pattern>/change</url-pattern>
+    </servlet-mapping>
+	
+</web-app>
